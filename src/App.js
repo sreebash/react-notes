@@ -1,16 +1,22 @@
+import {BrowserRouter, BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import React, {Component} from 'react';
 import Header from "./components/Header";
 import NotesListPage from "./pages/NotesListPage";
+import NotePage from "./pages/NotePage";
 
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
+
+function App() {
+    return (
+        <div>
+            <BrowserRouter>
                 <Header/>
-                <NotesListPage/>
-            </div>
-        );
-    }
+                <Routes>
+                    <Route path="/" element={<NotesListPage/>}/>
+                    <Route path="/note" element={<NotePage/>}/>
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
