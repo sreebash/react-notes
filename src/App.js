@@ -11,8 +11,8 @@ function App() {
             <BrowserRouter>
                 <Header/>
                 <Routes>
-                    <Route path="/" element={<NotesListPage/>}/>
-                    <Route path="/note" element={<NotePage/>}/>
+                    <Route exact path="/" element={<NotesListPage/>}/>
+                    <Route exact path="/note/:noteId" element={<NotePage/>}/>
                 </Routes>
             </BrowserRouter>
         </div>
