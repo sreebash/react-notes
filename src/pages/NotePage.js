@@ -27,7 +27,16 @@ const NotePage = () => {
             },
             body: JSON.stringify(note)
         })
-        console.log('note:', note)
+    }
+    
+    let deleteNote = async () => {
+        await fetch(`/api/notes/${noteId}/delete/`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'Application/json'
+            }
+        })
+        navigate('/')
     }
     
     const navigate = useNavigate();
@@ -38,13 +47,18 @@ const NotePage = () => {
     
     return (
         <div className="note">
-            <div className="notes-header">
+            <div className="note-header">
                 <h3>
                     <img src={ArrowLeft} alt="" onClick={handleSubmit}/>
-                
                 </h3>
+                <button onClick={deleteNote}>Delete</button>
+            
             </div>
-            <textarea onChange={(e) => {setNote({...note, 'body': e.target.value})}} value={note.body}></textarea>
+            
+            <textarea onChange={(e) => {
+                setNote({...note, 'body': e.target.value})
+            }} value={note.body}></textarea>
+        
         
         </div>
     )
