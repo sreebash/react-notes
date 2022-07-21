@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import ArrowLeft from '../assets/arrow-left.svg'
 import {useNavigate} from 'react-router-dom';
 
 
-
 const NotePage = () => {
-    const {noteId, history} = useParams();
+    const {noteId} = useParams();
     
     let [note, setNote] = useState({});
     
     const getNote = async () => {
+        if (noteId === 'new') return
         let response = await fetch(`/api/notes/${noteId}`)
         let data = await response.json()
         setNote(data)
@@ -20,6 +20,15 @@ const NotePage = () => {
         getNote()
     }, [noteId])
     
+    let createNote = async () => {
+        await fetch(`/api/notes/create/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'Application/json'
+            },
+            body: JSON.stringify(note)
+        })
+    }
     let updateNote = async () => {
         await fetch(`/api/notes/${noteId}/update/`, {
             method: "PUT",
@@ -41,8 +50,15 @@ const NotePage = () => {
     }
     
     const navigate = useNavigate();
+    
     let handleSubmit = () => {
-        updateNote()
+        if (noteId !== 'new' && !note.body) {
+            deleteNote()
+        } else if (noteId !== 'new') {
+            updateNote()
+        } else if (noteId === 'new' && note !== '') {
+            createNote()
+        }
         navigate('/')
     }
     
@@ -52,7 +68,8 @@ const NotePage = () => {
                 <h3>
                     <img src={ArrowLeft} alt="" onClick={handleSubmit}/>
                 </h3>
-                <button onClick={deleteNote}>Delete</button>
+                {noteId !== 'new' ? (<button onClick={deleteNote}>Delete</button>
+                ) : (<button>Done</button>)}
             
             </div>
             

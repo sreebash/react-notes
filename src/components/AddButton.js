@@ -4,7 +4,7 @@ import AddIcon from '../assets/add.svg';
 
 const AddButton = () => {
     return (
-        <Link to="/note/new/" className="floating-button">
+        <Link to="/note/new" className="floating-button">
             <img src={AddIcon} alt=""/>
         </Link>
     );
