@@ -1,5 +1,5 @@
-import {BrowserRouter, BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import React, {Component} from 'react';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import React from 'react';
 import Header from "./components/Header";
 import NotesListPage from "./pages/NotesListPage";
 import NotePage from "./pages/NotePage";

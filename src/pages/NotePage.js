@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import { useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import ArrowLeft from '../assets/arrow-left.svg'
 import {useNavigate} from 'react-router-dom';
 
 
 const NotePage = () => {
     const {noteId} = useParams();
+    const navigate = useNavigate();
+    
     
     let [note, setNote] = useState({});
     
@@ -49,7 +51,6 @@ const NotePage = () => {
         navigate('/')
     }
     
-    const navigate = useNavigate();
     
     let handleSubmit = () => {
         if (noteId !== 'new' && !note.body) {
