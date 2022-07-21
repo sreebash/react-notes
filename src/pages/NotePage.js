@@ -4,6 +4,7 @@ import ArrowLeft from '../assets/arrow-left.svg'
 import {useNavigate} from 'react-router-dom';
 
 
+
 const NotePage = () => {
     const {noteId, history} = useParams();
     
